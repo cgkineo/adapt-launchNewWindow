@@ -3,40 +3,6 @@
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
   "required":false,
-  "globals": {
-    "launchTitle": {
-      "type": "string",
-      "required": true,
-      "default": "Relaunching",
-      "inputType": "Text",
-      "validators": [],
-      "translatable": true
-    },
-    "launchBody": {
-      "type": "string",
-      "required": true,
-      "default": "A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
-      "inputType": "Text",
-      "validators": [],
-      "translatable": true
-    },
-    "closedTitle": {
-      "type": "string",
-      "required": true,
-      "default": "You have closed the course",
-      "inputType": "Text",
-      "validators": [],
-      "translatable": true
-    },
-    "closedBody": {
-      "type": "string",
-      "required": true,
-      "default": "Please close this window to continue.",
-      "inputType": "Text",
-      "validators": [],
-      "translatable": true
-    }
-  },
   "properties":{
     "pluginLocations": {
       "type":"object",
@@ -79,7 +45,43 @@
                   "inputType": "Text",
                   "validators": [],
                   "translatable": false
-                }
+                },
+                "launchTitle": {
+                  "type": "string",
+                  "default":"Relaunching",
+                  "required": false,
+                  "title": "Initial launch title",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
+                "launchBody": {
+                  "type": "string",
+                  "default":"A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+                  "required": false,
+                  "title": "Initial launch body",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
+                "closedTitle": {
+                  "type": "string",
+                  "default":"You have closed the course",
+                  "required": false,
+                  "title": "Course closed title",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
+                "closedBody": {
+                  "type": "string",
+                  "default":"Please close this window to continue.",
+                  "required": false,
+                  "title": "Course closed body",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
               }
             }
           }

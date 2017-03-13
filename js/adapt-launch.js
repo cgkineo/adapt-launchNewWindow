@@ -19,7 +19,7 @@ define([
             if (!this.isEnabled()) return;
 
             this.stopAdaptLoading();
-            this.loadCourseData();           
+            this.newLaunchView();
 
         },
 
@@ -40,24 +40,10 @@ define([
             });
         },
 
-        loadCourseData: function() {
-
-            this.listenTo(Adapt, 'courseModel:dataLoaded', this.onCourseDataLoaded);
-            
-            Adapt.trigger("configModel:loadCourseData");
-
-        },
-
-        onCourseDataLoaded: function() {
-            
-            this.newLaunchView();
-
-        },
-
         newLaunchView: function() {
 
             this.launchView = new LaunchView({
-                model: Adapt.course
+                model: Adapt.config
             });
 
             this.listenTo(this.launchView, "launch:manualLaunch", this.onLaunchedManually);

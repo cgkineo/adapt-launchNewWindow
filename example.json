@@ -1,0 +1,10 @@
+//config.json
+"_launch": {
+    "_isEnabled": true,
+    "_relaunchOnSelector": "*",
+    "_delay": 2000,
+    "launchTitle": "Relaunching",
+    "launchBody": "A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+    "closedTitle": "You have closed the course",
+    "closedBody": "Please close this window to continue."
+}
