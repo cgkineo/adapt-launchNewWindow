@@ -1,19 +1,28 @@
 <div class="aligner">
 	<div class="content">
-		{{#unless _wasClosed}}
+		{{#equals state LAUNCH_STATE.PRELAUNCH}}
+			<div class="title">
+			{{{compile _launch.preLaunchTitle this}}}
+			</div>
+			<div class="body">
+			{{{compile _launch.preLaunchBody this}}}
+			</div>
+		{{/equals}}
+		{{#equals state LAUNCH_STATE.PROGRESS}}
 			<div class="title">
 			{{{compile _launch.launchTitle this}}}
 			</div>
 			<div class="body">
 			{{{compile _launch.launchBody this}}}
 			</div>
-		{{else}}
+		{{/equals}}
+		{{#equals state LAUNCH_STATE.CLOSED}}
 			<div class="title">
 			{{{compile _launch.closedTitle this}}}
 			</div>
 			<div class="body">
 			{{{compile _launch.closedBody this}}}
 			</div>
-		{{/unless}}
+		{{/equals}}
 	</div>
 </div>

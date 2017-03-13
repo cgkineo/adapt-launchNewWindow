@@ -28,7 +28,7 @@
                       ]
                     }
                 },
-                "_relaunchOnSelector": {
+                "_selector": {
                   "type": "string",
                   "default":".ios, .ipad, .iphone",
                   "required": false,
@@ -46,20 +46,38 @@
                   "validators": [],
                   "translatable": false
                 },
+                "preLaunchTitle": {
+                  "type": "string",
+                  "default":"Launching course",
+                  "required": false,
+                  "title": "Pre-launch title",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
+                "preLaunchBody": {
+                  "type": "string",
+                  "default":"A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+                  "required": false,
+                  "title": "Pre-launch body",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
                 "launchTitle": {
                   "type": "string",
-                  "default":"Relaunching",
+                  "default":"Launched",
                   "required": false,
-                  "title": "Initial launch title",
+                  "title": "Launch-in-progress title",
                   "inputType": "Text",
                   "validators": [],
                   "translatable": false
                 },
                 "launchBody": {
                   "type": "string",
-                  "default":"A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+                  "default":"A new window should have opened with your course content. If it hasn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
                   "required": false,
-                  "title": "Initial launch body",
+                  "title": "Launch-in-progress body",
                   "inputType": "Text",
                   "validators": [],
                   "translatable": false

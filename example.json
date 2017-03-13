@@ -1,10 +1,22 @@
 //config.json
-"_launch": {
-    "_isEnabled": true,
-    "_relaunchOnSelector": "*",
-    "_delay": 2000,
-    "launchTitle": "Relaunching",
-    "launchBody": "A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
-    "closedTitle": "You have closed the course",
-    "closedBody": "Please close this window to continue."
-}
+    "_launch": {
+        "_isEnabled": true,
+        "_delay": 2000,
+        "_stopSessionInitialize": true,
+        "_newWindow": {
+            "_selector": "*",
+            "_href": "index_lms.html",
+            "_target": "courseWin",
+            "_strWindowFeatures": "width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes"
+        },
+        "_currentWindow": {
+            "_selector": "*",
+            "_href": "index_lms.html"
+        },
+        "preLaunchTitle": "Launching course",
+        "preLaunchBody": "A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+        "launchTitle": "Launched",
+        "launchBody": "A new window should have opened with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+        "closedTitle": "You have closed the course",
+        "closedBody": "Please close this window to continue."
+    }

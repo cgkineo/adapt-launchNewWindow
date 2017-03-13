@@ -1,10 +1,11 @@
 define([
-    'core/js/adapt'
-], function(Adapt) {
+    'core/js/adapt',
+    './launchStateEnum'
+], function(Adapt, LAUNCH_STATE) {
 
     var LaunchView = Backbone.View.extend({
 
-        _wasClosed: false,
+        state: LAUNCH_STATE.PRELAUNCH,
 
         className: "launch",
 
@@ -37,7 +38,8 @@ define([
             _.extend(data, {
                 location: window.location,
                 href: href.join(""),
-                _wasClosed: this._wasClosed
+                state: this.state,
+                LAUNCH_STATE: LAUNCH_STATE
             });
 
             var template = Handlebars.templates[this.constructor.template];
@@ -46,9 +48,9 @@ define([
 
         },
 
-        setCourseClosed: function(closed) {
+        setLaunchState: function(state) {
 
-            this._wasClosed = closed;
+            this.state = state;
             this.render();
 
         }
