@@ -1,0 +1,96 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "required":false,
+  "globals": {
+    "launchTitle": {
+      "type": "string",
+      "required": true,
+      "default": "Relaunching",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    },
+    "launchBody": {
+      "type": "string",
+      "required": true,
+      "default": "A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    },
+    "closedTitle": {
+      "type": "string",
+      "required": true,
+      "default": "You have closed the course",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    },
+    "closedBody": {
+      "type": "string",
+      "required": true,
+      "default": "Please close this window to continue.",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    }
+  },
+  "properties":{
+    "pluginLocations": {
+      "type":"object",
+      "required":true,
+      "properties":{
+        "config": {
+          "type":"object",
+          "properties":{
+            "_launch": {
+              "legend" : "Launch",
+              "type":"object",
+              "required":false,
+              "properties": {
+                "_isEnabled": {
+                  "type":"boolean",
+                  "required":true,
+                  "title": "Enabled",
+                  "inputType" : {
+                      "type" : "Boolean",
+                      "options" : [ 
+                        true, 
+                        false
+                      ]
+                    }
+                },
+                "_relaunchOnSelector": {
+                  "type": "string",
+                  "default":".ios, .ipad, .iphone",
+                  "required": false,
+                  "title": "Relaunch On Selector",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                }
+              }
+            }
+          }
+        },
+        "course": {
+          "type":"object"
+        },
+        "contentobject": {
+          "type":"object"
+        },
+        "article": {
+          "type":"object"
+        },
+        "block": {
+          "type":"object"
+        },
+        "component": {
+          "type":"object"
+        }
+      }
+    }
+  }
+}

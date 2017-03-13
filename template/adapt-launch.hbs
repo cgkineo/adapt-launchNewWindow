@@ -1,0 +1,19 @@
+<div class="aligner">
+	<div class="content">
+		{{#unless _wasClosed}}
+			<div class="title">
+			{{{compile _globals._extensions._launch.launchTitle this}}}
+			</div>
+			<div class="body">
+			{{{compile _globals._extensions._launch.launchBody this}}}
+			</div>
+		{{else}}
+			<div class="title">
+			{{{compile _globals._extensions._launch.closedTitle this}}}
+			</div>
+			<div class="body">
+			{{{compile _globals._extensions._launch.closedBody this}}}
+			</div>
+		{{/unless}}
+	</div>
+</div>
