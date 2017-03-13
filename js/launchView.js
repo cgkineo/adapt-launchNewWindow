@@ -30,7 +30,8 @@ define([
                 location.hash
             ];
 
-            href[2] = ( !href[2] ? "?" : "" ) + "relaunched=true";
+            // Add relaunched to search part incase window.open doesn't work properly
+            //href[2] = ( !href[2] ? "?" : "" ) + "relaunched=true";
 
             var data = this.model.toJSON();
             _.extend(data, {

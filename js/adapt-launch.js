@@ -27,7 +27,8 @@ define([
 
             if (!this._config || !this._config._isEnabled) return;
             if (window._WAS_RELAUNCHED) return;
-            if (/relaunched=true/.test(location.search)) return;
+            // Check relaunched in search part incase window.open doesn't work properly
+            //if (/relaunched=true/.test(location.search)) return;
             if (!$("html").is(this._config._relaunchOnSelector)) return;
 
             return true;
