@@ -81,7 +81,12 @@ define([
 
         onLaunchViewLoaded: function() {
 
-            var delay = 0 || this._config._delay;
+            var delay; 
+            try {
+                delay = parseInt(this._config._delay);
+            } catch(error) {
+                delay = 2000;
+            }
 
             _.delay(_.bind(function() {
 

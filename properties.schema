@@ -70,6 +70,15 @@
                   "inputType": "Text",
                   "validators": [],
                   "translatable": false
+                },
+                "_delay": {
+                  "type": "string",
+                  "default":"2000",
+                  "required": false,
+                  "title": "Delay relaunch by milliseconds",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
                 }
               }
             }
