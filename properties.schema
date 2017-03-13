@@ -81,7 +81,7 @@
                   "inputType": "Text",
                   "validators": [],
                   "translatable": false
-                },
+                }
               }
             }
           }
