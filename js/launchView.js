@@ -13,7 +13,8 @@ define([
             "click a": "onLaunchedManually"
         },
 
-        initialize: function() {
+        initialize: function(options) {
+            this.href = options.href;
             this.render();
         },
 
@@ -24,20 +25,9 @@ define([
         
         render: function() {
 
-            var href = [
-                location.origin,
-                location.pathname,
-                location.search,
-                location.hash
-            ];
-
-            // Add relaunched to search part incase window.open doesn't work properly
-            //href[2] = ( !href[2] ? "?" : "" ) + "relaunched=true";
-
             var data = this.model.toJSON();
             _.extend(data, {
-                location: window.location,
-                href: href.join(""),
+                href: this.href,
                 state: this.state,
                 LAUNCH_STATE: LAUNCH_STATE
             });

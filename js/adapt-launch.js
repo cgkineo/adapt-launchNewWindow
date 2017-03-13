@@ -10,6 +10,7 @@ define([
     var Launch = Backbone.Controller.extend({
 
         mode: LAUNCH_MODE.NONE,
+        href: null,
 
         initialize: function() {
 
@@ -47,6 +48,8 @@ define([
             this.mode = this.getLaunchMode();
             if (this.mode == LAUNCH_MODE.NONE) return;
 
+            this.href = this.getHREF();
+
             return true;
 
         },
@@ -64,6 +67,35 @@ define([
 
         },
 
+        getHREF: function() {
+
+            var href;
+            switch(this.mode) {
+                case LAUNCH_MODE.NEW_WINDOW: {
+                    href = this._config._newWindow._href;
+                    break;
+                } case LAUNCH_MODE.CURRENT_WINDOW: {
+                    href = this._config._currentWindow._href;
+                    break;
+                }
+            }
+
+            var location = document.createElement("a");
+            location.href = href;
+
+            var href = [
+                location.origin,
+                location.pathname,
+                location.search,
+                location.hash
+            ];
+
+            href[2] = (!href[2] ? "?" : "&") + "rl=1";
+
+            return href.join("");
+
+        },
+
         stopAdaptLoading: function() {
             Adapt.config.set("_canTriggerDataLoaded", !this._config._stopSessionInitialize);
             Adapt.config.setLocking("_canLoadData", false);
@@ -75,7 +107,8 @@ define([
         newLaunchView: function() {
 
             this.launchView = new LaunchView({
-                model: Adapt.config
+                model: Adapt.config,
+                href : this.href
             });
 
             this.listenTo(this.launchView, "launch:manualLaunch", this.onLaunchedManually);
@@ -126,25 +159,6 @@ define([
             }
 
         },
-
-        makeUrl: function(href) {
-
-            var location = document.createElement("a");
-            location.href = href;
-
-            var href = [
-                location.origin,
-                location.pathname,
-                location.search,
-                location.hash
-            ];
-
-            href[2] = (!href[2] ? "?" : "&") + "rl=1";
-
-            return href.join("");
-
-        },
-
         openNewWindow: function() {
 
             if (this.newWindow) {
@@ -152,14 +166,12 @@ define([
                 this.newWindow.close();
             }
 
-            var url = this.makeUrl(this._config._newWindow._href);
-
             var strWindowFeatures = Handlebars.compile(this._config._newWindow._strWindowFeatures)({
                 width: screen.availWidth,
                 height: screen.availHeight
             });
 
-            this.newWindow = window.open(url, this._config._newWindow._target, strWindowFeatures);
+            this.newWindow = window.open(this.href, this._config._newWindow._target, strWindowFeatures);
             this.newWindow._relaunched = this.onNewWindowLaunched;
 
             $(this.newWindow).on("beforeunload", this.onNewWindowClosed);
@@ -180,9 +192,7 @@ define([
 
         openCurrentWindow: function() {
 
-            var url = this.makeUrl(this._config._currentWindow._href);
-
-            window.location.href = url;
+            window.location.href = this.href;
 
         }
 
