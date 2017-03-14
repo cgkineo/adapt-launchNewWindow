@@ -14,7 +14,7 @@ define([
 
         initialize: function() {
 
-            _.bindAll(this, "onNewWindowClosed", "onNewWindowLaunched", "onLaunchViewLoaded", "onLaunchDelayComplete");
+            _.bindAll(this, "onNewWindowClosed", "onNewWindowLaunched", "onLaunchViewReady", "onLaunchDelayComplete");
 
             this.listenTo(Adapt, 'configModel:preDataLoaded', this.onConfigLoaded);
 
@@ -22,9 +22,10 @@ define([
 
         onConfigLoaded: function() {
 
-            this._config = Adapt.config.get("_launch");
+            this._config = Adapt.config.get("_launchNewWindow");
 
             if (window._relaunched) {
+                // Trigger callback to let parent window know Adapt was launched
                 window._relaunched();
             }
         
@@ -34,7 +35,7 @@ define([
             }
 
             this.stopAdaptLoading();
-            this.newLaunchView();
+            this.start();
 
         },
 
@@ -43,12 +44,13 @@ define([
             if (!this._config || !this._config._isEnabled) return;
 
             // Check relaunched in search part incase window.open doesn't work properly
-            if (/rl=1/.test(location.search)) return;
+            if (/relaunched=y/.test(location.search)) return;
 
             this.mode = this.getLaunchMode();
             if (this.mode == LAUNCH_MODE.NONE) return;
 
             this.href = this.getHREF();
+            this.delay = this.getDelay();
 
             return true;
 
@@ -57,8 +59,8 @@ define([
         getLaunchMode: function() {
 
             var $html = $("html");
-            var isNewWindow = $html.is(this._config._newWindow._selector);
-            var isCurrentWindow = $html.is(this._config._currentWindow._selector);
+            var isNewWindow = this._config._newWindow._selector && $html.is(this._config._newWindow._selector);
+            var isCurrentWindow = this._config._currentWindow._selector && $html.is(this._config._currentWindow._selector);
             
             if (isNewWindow) return LAUNCH_MODE.NEW_WINDOW;
             if (isCurrentWindow) return LAUNCH_MODE.CURRENT_WINDOW;
@@ -90,18 +92,50 @@ define([
                 location.hash
             ];
 
-            href[2] = (!href[2] ? "?" : "&") + "rl=1";
+            href[2] = (!href[2] ? "?" : "&") + "relaunched=y";
 
             return href.join("");
 
         },
 
+        getDelay: function() {
+
+            var delay;
+            switch(this.mode) {
+                case LAUNCH_MODE.NEW_WINDOW: {
+                    delay = parseInt(this._config._newWindow._delay) || 2000;
+                    break;
+                } case LAUNCH_MODE.CURRENT_WINDOW: {
+                    delay = parseInt(this._config._currentWindow._delay) || 0;
+                    break;
+                }
+            }
+
+            return delay;
+
+        },
+
         stopAdaptLoading: function() {
+
             Adapt.config.set("_canTriggerDataLoaded", !this._config._stopSessionInitialize);
+
             Adapt.config.setLocking("_canLoadData", false);
             Adapt.config.set("_canLoadData", false, {
                 pluginName: "adapt-launch" 
             });
+
+        },
+
+        start: function() {
+
+            if (this.delay === 0 && this.mode == LAUNCH_MODE.CURRENT_WINDOW) {
+                // If no delay and redirecting to current window, skip creation of a launch view
+                this.launch();
+                return;
+            }
+
+            this.newLaunchView();
+
         },
 
         newLaunchView: function() {
@@ -115,38 +149,31 @@ define([
 
             $("body").append(this.launchView.$el);
 
-            $("#wrapper").fadeOut({ duration: "slow", complete: this.onLaunchViewLoaded });
-
+            $("#wrapper").fadeOut({ duration: "fast", complete: this.onLaunchViewReady });
+   
         },
 
-        onLaunchViewLoaded: function() {
+        onLaunchViewReady: function() {
 
-            var delay; 
-            try {
-                delay = parseInt(this._config._delay);
-            } catch(error) {
-                delay = 2000;
-            }
-
-            _.delay(this.onLaunchDelayComplete, delay);
+            _.delay(this.onLaunchDelayComplete, this.delay);
 
         },
 
         onLaunchDelayComplete: function() {
 
             if (this._wasLaunchedManually) return;
-            this.processMode();
+            this.launch();
 
         },
 
         onLaunchedManually: function() {
 
             this._wasLaunchedManually = true;
-            this.processMode();
+            this.launch();
 
         },
 
-        processMode: function() {
+        launch: function() {
 
             switch(this.mode) {
                 case LAUNCH_MODE.NEW_WINDOW: {
@@ -159,11 +186,13 @@ define([
             }
 
         },
+
         openNewWindow: function() {
 
             if (this.newWindow) {
                 $(this.newWindow).off("beforeunload");
                 this.newWindow.close();
+                this.newWindow = null;
             }
 
             var strWindowFeatures = Handlebars.compile(this._config._newWindow._strWindowFeatures)({
@@ -172,20 +201,31 @@ define([
             });
 
             this.newWindow = window.open(this.href, this._config._newWindow._target, strWindowFeatures);
-            this.newWindow._relaunched = this.onNewWindowLaunched;
+            if (this.newWindow.location.href != "about:blank") {
 
-            $(this.newWindow).on("beforeunload", this.onNewWindowClosed);
+                // Force close on stale windows
+                // This will happen if someone refreshes the launch page with the course open
+                this.newWindow.close();
+                this.newWindow = window.open(this.href, this._config._newWindow._target, strWindowFeatures);
+
+            }
+
+            // Attach callback function so that we know adapt has loaded on the other side
+            this.newWindow._relaunched = this.onNewWindowLaunched;
 
         },
 
         onNewWindowLaunched: function() {
 
+            // Adapt called back here from the new window
+            $(this.newWindow).on("beforeunload", this.onNewWindowClosed);
             this.launchView.setLaunchState(LAUNCH_STATE.PROGRESS);
             
         },
 
         onNewWindowClosed: function() {
 
+            // Content window was closed by the user
             this.launchView.setLaunchState(LAUNCH_STATE.CLOSED);
 
         },

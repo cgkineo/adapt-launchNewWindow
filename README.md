@@ -1,1 +1,1 @@
-# adapt-launch
+# adapt-launchNewWindow

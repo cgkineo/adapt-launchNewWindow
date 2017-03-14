@@ -3,8 +3,7 @@ define([
     'core/js/models/configModel'
 ], function(Adapt, ConfigModel) {
 
-
-    var initialize = ConfigModel.prototype.initialize;
+    // Override config model to stop spoor from initializing on 'configModel:dataLoaded'
     ConfigModel.prototype.initialize = function(attrs, options) {
 
         this.url = options.url;
@@ -40,6 +39,5 @@ define([
         });
 
     };
-
 
 })

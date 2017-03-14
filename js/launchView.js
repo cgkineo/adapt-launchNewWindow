@@ -7,7 +7,7 @@ define([
 
         state: LAUNCH_STATE.PRELAUNCH,
 
-        className: "launch",
+        className: "launch-new-window",
 
         events: {
             "click a": "onLaunchedManually"
@@ -47,7 +47,7 @@ define([
 
     }, {
 
-        template: "adapt-launch"
+        template: "launchNewWindow"
 
     });
 

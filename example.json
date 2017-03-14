@@ -1,22 +1,23 @@
 //config.json
-    "_launch": {
+    "_launchNewWindow": {
         "_isEnabled": true,
-        "_delay": 2000,
         "_stopSessionInitialize": true,
         "_newWindow": {
-            "_selector": "*",
+            "_selector": ".touch",
             "_href": "index_lms.html",
             "_target": "courseWin",
-            "_strWindowFeatures": "width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes"
+            "_strWindowFeatures": "width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
+            "_delay": 500
         },
         "_currentWindow": {
             "_selector": "*",
-            "_href": "index_lms.html"
+            "_href": "index_lms.html",
+            "_delay": 0
         },
-        "preLaunchTitle": "Launching course",
-        "preLaunchBody": "A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
-        "launchTitle": "Launched",
-        "launchBody": "A new window should have opened with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
-        "closedTitle": "You have closed the course",
+        "preLaunchTitle": "The course should now open in a new browser window.",
+        "preLaunchBody": "If this does not occur, please deactivate any popup blocking software - then <a href=\"{{href}}\" target=\"_blank\">click here</a> or refresh this page to try again.",
+        "launchTitle": "The course should now be open in a new browser window.",
+        "launchBody": "Please ensure you don't close or do anything in this window whilst the course is in progress.",
+        "closedTitle": "You have closed the course.",
         "closedBody": "Please close this window to continue."
     }

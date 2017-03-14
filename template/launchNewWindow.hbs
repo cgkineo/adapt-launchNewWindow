@@ -2,26 +2,26 @@
 	<div class="content">
 		{{#equals state LAUNCH_STATE.PRELAUNCH}}
 			<div class="title">
-			{{{compile _launch.preLaunchTitle this}}}
+			{{{compile _launchNewWindow.preLaunchTitle this}}}
 			</div>
 			<div class="body">
-			{{{compile _launch.preLaunchBody this}}}
+			{{{compile _launchNewWindow.preLaunchBody this}}}
 			</div>
 		{{/equals}}
 		{{#equals state LAUNCH_STATE.PROGRESS}}
 			<div class="title">
-			{{{compile _launch.launchTitle this}}}
+			{{{compile _launchNewWindow.launchTitle this}}}
 			</div>
 			<div class="body">
-			{{{compile _launch.launchBody this}}}
+			{{{compile _launchNewWindow.launchBody this}}}
 			</div>
 		{{/equals}}
 		{{#equals state LAUNCH_STATE.CLOSED}}
 			<div class="title">
-			{{{compile _launch.closedTitle this}}}
+			{{{compile _launchNewWindow.closedTitle this}}}
 			</div>
 			<div class="body">
-			{{{compile _launch.closedBody this}}}
+			{{{compile _launchNewWindow.closedBody this}}}
 			</div>
 		{{/equals}}
 	</div>

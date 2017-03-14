@@ -11,8 +11,8 @@
         "config": {
           "type":"object",
           "properties":{
-            "_launch": {
-              "legend" : "Launch",
+            "_launchNewWindow": {
+              "legend" : "Launch New Window",
               "type":"object",
               "required":false,
               "properties": {
@@ -28,27 +28,95 @@
                       ]
                     }
                 },
-                "_selector": {
-                  "type": "string",
-                  "default":".ios, .ipad, .iphone",
-                  "required": false,
-                  "title": "Relaunch On Selector",
-                  "inputType": "Text",
-                  "validators": [],
-                  "translatable": false
+                "_currentWindow": {
+                  "legend" : "Launch New Window",
+                  "type":"object",
+                  "required":false,
+                  "properties": {
+                    "_selector": {
+                      "type": "string",
+                      "default":".touch",
+                      "required": false,
+                      "title": "Selector",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
+                    "_delay": {
+                      "type": "string",
+                      "default":"2000",
+                      "required": false,
+                      "title": "Delay relaunch by milliseconds",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
+                    "_href": {
+                      "type": "string",
+                      "default":"index_lms.html",
+                      "required": false,
+                      "title": "New window href",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
+                    "_target": {
+                      "type": "string",
+                      "default":"courseWin",
+                      "required": false,
+                      "title": "New window target",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
+                    "_strWindowFeatures": {
+                      "type": "string",
+                      "default":"width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
+                      "required": false,
+                      "title": "New window strWindowFeatures",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    }
+                  }
                 },
-                "_delay": {
-                  "type": "string",
-                  "default":"2000",
-                  "required": false,
-                  "title": "Delay relaunch by milliseconds",
-                  "inputType": "Text",
-                  "validators": [],
-                  "translatable": false
+                "_newWindow": {
+                  "legend" : "Launch New Window",
+                  "type":"object",
+                  "required":false,
+                  "properties": {
+                    "_selector": {
+                      "type": "string",
+                      "default":"*",
+                      "required": false,
+                      "title": "Selector",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
+                    "_delay": {
+                      "type": "string",
+                      "default":"2000",
+                      "required": false,
+                      "title": "Delay relaunch by milliseconds",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
+                    "_href": {
+                      "type": "string",
+                      "default":"index_lms.html",
+                      "required": false,
+                      "title": "Redirect to href",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    }
+                  }
                 },
                 "preLaunchTitle": {
                   "type": "string",
-                  "default":"Launching course",
+                  "default":"The course should now open in a new browser window.",
                   "required": false,
                   "title": "Pre-launch title",
                   "inputType": "Text",
@@ -57,7 +125,7 @@
                 },
                 "preLaunchBody": {
                   "type": "string",
-                  "default":"A new window should open with your course content. If it doesn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+                  "default":"If this does not occur, please deactivate any popup blocking software - then <a href=\"{{href}}\" target=\"_blank\">click here</a> or refresh this page to try again.",
                   "required": false,
                   "title": "Pre-launch body",
                   "inputType": "Text",
@@ -68,14 +136,14 @@
                   "type": "string",
                   "default":"Launched",
                   "required": false,
-                  "title": "Launch-in-progress title",
+                  "title": "The course should now be open in a new browser window.",
                   "inputType": "Text",
                   "validators": [],
                   "translatable": false
                 },
                 "launchBody": {
                   "type": "string",
-                  "default":"A new window should have opened with your course content. If it hasn't please click <a href=\"{{href}}\" target=\"_blank\">here.</a>",
+                  "default":"Please ensure you don't close or do anything in this window whilst the course is in progress.",
                   "required": false,
                   "title": "Launch-in-progress body",
                   "inputType": "Text",
@@ -84,7 +152,7 @@
                 },
                 "closedTitle": {
                   "type": "string",
-                  "default":"You have closed the course",
+                  "default":"You have closed the course.",
                   "required": false,
                   "title": "Course closed title",
                   "inputType": "Text",

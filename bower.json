@@ -1,17 +1,17 @@
 {
-  "name": "adapt-launch",
+  "name": "adapt-launchNewWindow",
   "version": "0.0.1",
   "framework": "^2.0.0",
-  "homepage": "https://github.com/cgkineo/adapt-launch",
-  "issues": "https://github.com/cgkineo/adapt-launch/issues/new",
-  "displayName" : "Launch",
-  "extension" : "launch",
+  "homepage": "https://github.com/cgkineo/adapt-launchNewWindow",
+  "issues": "https://github.com/cgkineo/adapt-launchNewWindow/issues/new",
+  "displayName" : "Launch New Window",
+  "extension" : "launchNewWindow",
   "description": "An extension which provides a launch page",
-  "main": "/js/adapt-launch.js",
+  "main": "/js/adapt-launchNewWindow.js",
   "keywords": [
     "adapt-plugin",
     "adapt-extension"
   ],
   "license": "GPLv3",
-  "targetAttribute": "_launch"
+  "targetAttribute": "_launchNewWindow"
 }
