@@ -2,12 +2,25 @@ define([
     'core/js/adapt',
     'core/js/models/courseModel',
     './launchView',
-    './launchStateEnum',
-    './launchModeEnum',
     './configModel'
-], function(Adapt, CourseModel, LaunchView, LAUNCH_STATE, LAUNCH_MODE) {
+], function(Adapt, CourseModel, LaunchView) {
+
+    var LAUNCH_MODE = ENUM([
+        "NONE",
+        "NEW_WINDOW",
+        "CURRENT_WINDOW"
+    ]);
+
+    var LAUNCH_STATE = ENUM([
+        "PRELAUNCH",
+        "PROGRESS",
+        "CLOSED"
+    ]);
 
     var Launch = Backbone.Controller.extend({
+
+        MODE: LAUNCH_MODE,
+        STATE: LAUNCH_STATE,
 
         mode: LAUNCH_MODE.NONE,
         href: null,
@@ -30,24 +43,38 @@ define([
             }
         
             if (!this.isEnabled()) {
+                // If the window has been relaunched then just proceed as normal loading Adapt
                 Adapt.config.set("_canTriggerDataLoaded", true);
                 return;
             }
 
             this.stopAdaptLoading();
-            this.start();
+            this.newLaunchView();
 
         },
 
         isEnabled: function() {
 
+            // Config not defined or enabled
             if (!this._config || !this._config._isEnabled) return;
 
             // Check relaunched in search part incase window.open doesn't work properly
             if (/relaunched=y/.test(location.search)) return;
 
+            // Check if active on this page
+            if (this._config._activeOnPages && this._config._activeOnPages.length > 0) {
+                var found = false;
+                this._config._activeOnPages.forEach(function(pageName) {
+                    if (new RegExp(pageName).test(location.href)) {
+                        found = true;
+                    }
+                });
+                if (!found) return;
+            }
+
+            // Check if the launch mode matches properly
             this.mode = this.getLaunchMode();
-            if (this.mode == LAUNCH_MODE.NONE) return;
+            if (this.mode !== LAUNCH_MODE.NEW_WINDOW) return;
 
             this.href = this.getHREF();
             this.delay = this.getDelay();
@@ -60,30 +87,17 @@ define([
 
             var $html = $("html");
             var isNewWindow = this._config._newWindow._selector && $html.is(this._config._newWindow._selector);
-            var isCurrentWindow = this._config._currentWindow._selector && $html.is(this._config._currentWindow._selector);
             
             if (isNewWindow) return LAUNCH_MODE.NEW_WINDOW;
-            if (isCurrentWindow) return LAUNCH_MODE.CURRENT_WINDOW;
 
-            return LAUNCH_MODE.NONE;
+            return LAUNCH_MODE.CURRENT_WINDOW;
 
         },
 
         getHREF: function() {
 
-            var href;
-            switch(this.mode) {
-                case LAUNCH_MODE.NEW_WINDOW: {
-                    href = this._config._newWindow._href;
-                    break;
-                } case LAUNCH_MODE.CURRENT_WINDOW: {
-                    href = this._config._currentWindow._href;
-                    break;
-                }
-            }
-
             var location = document.createElement("a");
-            location.href = href;
+            location.href = window.location.href;
 
             var href = [
                 location.origin,
@@ -105,9 +119,6 @@ define([
                 case LAUNCH_MODE.NEW_WINDOW: {
                     delay = parseInt(this._config._newWindow._delay) || 2000;
                     break;
-                } case LAUNCH_MODE.CURRENT_WINDOW: {
-                    delay = parseInt(this._config._currentWindow._delay) || 0;
-                    break;
                 }
             }
 
@@ -123,18 +134,6 @@ define([
             Adapt.config.set("_canLoadData", false, {
                 pluginName: "adapt-launch" 
             });
-
-        },
-
-        start: function() {
-
-            if (this.delay === 0 && this.mode == LAUNCH_MODE.CURRENT_WINDOW) {
-                // If no delay and redirecting to current window, skip creation of a launch view
-                this.launch();
-                return;
-            }
-
-            this.newLaunchView();
 
         },
 
@@ -162,28 +161,14 @@ define([
         onLaunchDelayComplete: function() {
 
             if (this._wasLaunchedManually) return;
-            this.launch();
+            this.openNewWindow();
 
         },
 
         onLaunchedManually: function() {
 
             this._wasLaunchedManually = true;
-            this.launch();
-
-        },
-
-        launch: function() {
-
-            switch(this.mode) {
-                case LAUNCH_MODE.NEW_WINDOW: {
-                    this.openNewWindow();
-                    break;
-                } case LAUNCH_MODE.CURRENT_WINDOW: {
-                    this.openCurrentWindow();
-                    break;
-                }
-            }
+            this.openNewWindow();
 
         },
 
@@ -227,12 +212,6 @@ define([
 
             // Content window was closed by the user
             this.launchView.setLaunchState(LAUNCH_STATE.CLOSED);
-
-        },
-
-        openCurrentWindow: function() {
-
-            window.location.href = this.href;
 
         }
 

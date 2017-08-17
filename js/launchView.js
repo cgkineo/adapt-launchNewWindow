@@ -1,11 +1,10 @@
 define([
-    'core/js/adapt',
-    './launchStateEnum'
-], function(Adapt, LAUNCH_STATE) {
+    'core/js/adapt'
+], function(Adapt) {
 
     var LaunchView = Backbone.View.extend({
 
-        state: LAUNCH_STATE.PRELAUNCH,
+        state: null,
 
         className: "launch-new-window",
 
@@ -14,6 +13,7 @@ define([
         },
 
         initialize: function(options) {
+            this.state = Adapt.launch.STATE.PRELAUNCH;
             this.href = options.href;
             this.render();
         },
@@ -29,7 +29,7 @@ define([
             _.extend(data, {
                 href: this.href,
                 state: this.state,
-                LAUNCH_STATE: LAUNCH_STATE
+                LAUNCH_STATE: Adapt.launch.STATE
             });
 
             var template = Handlebars.templates[this.constructor.template];
