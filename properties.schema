@@ -28,57 +28,27 @@
                       ]
                     }
                 },
-                "_currentWindow": {
-                  "legend" : "Launch New Window",
-                  "type":"object",
-                  "required":false,
-                  "properties": {
-                    "_selector": {
-                      "type": "string",
-                      "default":".touch",
-                      "required": false,
-                      "title": "Selector",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_delay": {
-                      "type": "string",
-                      "default":"2000",
-                      "required": false,
-                      "title": "Delay relaunch by milliseconds",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_href": {
-                      "type": "string",
-                      "default":"index_lms.html",
-                      "required": false,
-                      "title": "New window href",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_target": {
-                      "type": "string",
-                      "default":"courseWin",
-                      "required": false,
-                      "title": "New window target",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_strWindowFeatures": {
-                      "type": "string",
-                      "default":"width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
-                      "required": false,
-                      "title": "New window strWindowFeatures",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
+                "_stopSessionInitialize": {
+                  "type":"boolean",
+                  "default": true,
+                  "required": true,
+                  "title": "Stop session initialization",
+                  "inputType" : {
+                      "type" : "Boolean",
+                      "options" : [ 
+                        true, 
+                        false
+                      ]
                     }
-                  }
+                },
+                "_activeOnPages": {
+                  "type": "array",
+                  "default": [
+                    "index_lms.html"
+                  ],
+                  "title": "Active on pages",
+                  "inputType": "List",
+                  "help": "List of urls to match which activate a new window"
                 },
                 "_newWindow": {
                   "legend" : "Launch New Window",
@@ -94,20 +64,29 @@
                       "validators": [],
                       "translatable": false
                     },
+                    "_target": {
+                      "type": "string",
+                      "default":"courseWin",
+                      "required": false,
+                      "title": "Window name",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
+                    "_strWindowFeatures": {
+                      "type": "string",
+                      "default":"width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
+                      "required": false,
+                      "title": "strWindowFeatures for new window",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": false
+                    },
                     "_delay": {
                       "type": "string",
                       "default":"2000",
                       "required": false,
                       "title": "Delay relaunch by milliseconds",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_href": {
-                      "type": "string",
-                      "default":"index_lms.html",
-                      "required": false,
-                      "title": "Redirect to href",
                       "inputType": "Text",
                       "validators": [],
                       "translatable": false
