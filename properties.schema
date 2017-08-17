@@ -57,7 +57,7 @@
                   "properties": {
                     "_selector": {
                       "type": "string",
-                      "default":"*",
+                      "default":".os-ios",
                       "required": false,
                       "title": "Selector",
                       "inputType": "Text",
