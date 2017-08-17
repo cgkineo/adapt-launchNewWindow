@@ -50,48 +50,41 @@
                   "inputType": "List",
                   "help": "List of urls to match which activate a new window"
                 },
-                "_newWindow": {
-                  "legend" : "Launch New Window",
-                  "type":"object",
-                  "required":false,
-                  "properties": {
-                    "_selector": {
-                      "type": "string",
-                      "default":".os-ios",
-                      "required": false,
-                      "title": "Selector",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_target": {
-                      "type": "string",
-                      "default":"courseWin",
-                      "required": false,
-                      "title": "Window name",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_strWindowFeatures": {
-                      "type": "string",
-                      "default":"width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
-                      "required": false,
-                      "title": "strWindowFeatures for new window",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    },
-                    "_delay": {
-                      "type": "string",
-                      "default":"2000",
-                      "required": false,
-                      "title": "Delay relaunch by milliseconds",
-                      "inputType": "Text",
-                      "validators": [],
-                      "translatable": false
-                    }
-                  }
+                "_activeOnSelector": {
+                  "type": "string",
+                  "default":".os-ios",
+                  "required": false,
+                  "title": "Active on html selector",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
+                "_target": {
+                  "type": "string",
+                  "default":"courseWin",
+                  "required": false,
+                  "title": "Window name",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
+                "_strWindowFeatures": {
+                  "type": "string",
+                  "default":"width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
+                  "required": false,
+                  "title": "strWindowFeatures for new window",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
+                },
+                "_delay": {
+                  "type": "string",
+                  "default":"2000",
+                  "required": false,
+                  "title": "Delay relaunch by milliseconds",
+                  "inputType": "Text",
+                  "validators": [],
+                  "translatable": false
                 },
                 "preLaunchTitle": {
                   "type": "string",

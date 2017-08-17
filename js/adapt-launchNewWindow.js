@@ -86,7 +86,7 @@ define([
         getLaunchMode: function() {
 
             var $html = $("html");
-            var isNewWindow = this._config._newWindow._selector && $html.is(this._config._newWindow._selector);
+            var isNewWindow = this._config._activeOnSelector && $html.is(this._config._activeOnSelector);
             
             if (isNewWindow) return LAUNCH_MODE.NEW_WINDOW;
 
@@ -117,7 +117,7 @@ define([
             var delay;
             switch(this.mode) {
                 case LAUNCH_MODE.NEW_WINDOW: {
-                    delay = parseInt(this._config._newWindow._delay) || 2000;
+                    delay = parseInt(this._config._delay) || 2000;
                     break;
                 }
             }
@@ -180,18 +180,18 @@ define([
                 this.newWindow = null;
             }
 
-            var strWindowFeatures = Handlebars.compile(this._config._newWindow._strWindowFeatures)({
+            var strWindowFeatures = Handlebars.compile(this._config._strWindowFeatures)({
                 width: screen.availWidth,
                 height: screen.availHeight
             });
 
-            this.newWindow = window.open(this.href, this._config._newWindow._target, strWindowFeatures);
+            this.newWindow = window.open(this.href, this._config._target, strWindowFeatures);
             if (this.newWindow.location.href != "about:blank") {
 
                 // Force close on stale windows
                 // This will happen if someone refreshes the launch page with the course open
                 this.newWindow.close();
-                this.newWindow = window.open(this.href, this._config._newWindow._target, strWindowFeatures);
+                this.newWindow = window.open(this.href, this._config._target, strWindowFeatures);
 
             }
 

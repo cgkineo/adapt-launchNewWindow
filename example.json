@@ -5,12 +5,10 @@
         "_activeOnPages": [
             "index_lms.html"
         ],
-        "_newWindow": {
-            "_selector": ".os-ios",
-            "_target": "courseWin",
-            "_strWindowFeatures": "width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
-            "_delay": 500
-        },
+        "_activeOnSelector": ".os-ios",
+        "_target": "courseWin",
+        "_strWindowFeatures": "width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes",
+        "_delay": 500,
         "preLaunchTitle": "The course should now open in a new browser window.",
         "preLaunchBody": "If this does not occur, please deactivate any popup blocking software - then <a href=\"{{href}}\" target=\"_blank\">click here</a> or refresh this page to try again.",
         "launchTitle": "The course should now be open in a new browser window.",
