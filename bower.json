@@ -1,7 +1,7 @@
 {
   "name": "adapt-launchNewWindow",
   "version": "0.0.1",
-  "framework": "^2.0.17",
+  "framework": ">=2.0.17",
   "homepage": "https://github.com/cgkineo/adapt-launchNewWindow",
   "issues": "https://github.com/cgkineo/adapt-launchNewWindow/issues/new",
   "displayName" : "Launch New Window",
