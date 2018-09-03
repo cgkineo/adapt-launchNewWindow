@@ -44,6 +44,7 @@ define([
         
             if (!this.isEnabled()) {
                 // If the window has been relaunched then just proceed as normal loading Adapt
+                Adapt.trigger("offlineStorage:prepare");
                 Adapt.config.set("_canTriggerDataLoaded", true);
                 return;
             }

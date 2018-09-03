@@ -12,13 +12,13 @@ define([
         // 'configModel:loadCourseData' event starts the core content collections and models being fetched
         this.fetch({
             success: function() {
-                Adapt.trigger('offlineStorage:prepare');
+                Adapt.trigger('configModel:preDataLoaded');
 
                 Adapt.wait.queue(function() {
-                    Adapt.trigger('configModel:preDataLoaded');
                     if (this.get('_canTriggerDataLoaded')) {
                         Adapt.trigger('configModel:dataLoaded');
                     }
+
                     if (this.get('_canLoadData')) {
                         Adapt.trigger('configModel:loadCourseData');
                     }
