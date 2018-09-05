@@ -1,12 +1,12 @@
 {
   "name": "adapt-launchNewWindow",
-  "version": "0.0.2",
-  "framework": ">=2.0.17",
+  "version": "0.1.0",
+  "framework": ">=3",
   "homepage": "https://github.com/cgkineo/adapt-launchNewWindow",
   "issues": "https://github.com/cgkineo/adapt-launchNewWindow/issues/new",
   "displayName" : "Launch New Window",
   "extension" : "launchNewWindow",
-  "description": "An extension which provides a launch page",
+  "description": "An extension to force the course to launch in a new window",
   "main": "/js/adapt-launchNewWindow.js",
   "keywords": [
     "adapt-plugin",
