@@ -20,4 +20,4 @@
         "closedBody": "Please close this window to continue."
     }
 ```
-The `_activeOnSelector` can be a comma-separated list if you want to target multiple platforms/browsers e.g. `"_activeOnSelector": ".os-ios, .os-android"`
+The `_activeOnSelector` setting can be a comma-separated list if you want to target multiple platforms/browsers e.g. `"_activeOnSelector": ".os-ios, .os-android"`
