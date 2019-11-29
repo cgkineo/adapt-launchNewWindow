@@ -1,5 +1,7 @@
 # adapt-launchNewWindow
 
+The launch new window extension forces your Adapt course to open in a new window - something that can be very useful if your course is being run from a platform that embeds the content within an iframe or frameset (which can cause rendering issues in iOS). The extension allows you to be quite specific about when it does this so you can, for example, set it to open the content on iOS/iPadOS only when running from an LMS (i.e. when index_lms.html is used to run the course).
+
 ```javascript
 //config.json
     "_launchNewWindow": {
