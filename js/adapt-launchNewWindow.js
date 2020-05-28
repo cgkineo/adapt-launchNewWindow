@@ -149,7 +149,7 @@ define([
 
             $("body").append(this.launchView.$el);
 
-            $("#wrapper").fadeOut({ duration: "fast", complete: this.onLaunchViewReady });
+            $("#wrapper, .js-loading, .loading").fadeOut({ duration: "fast", complete: this.onLaunchViewReady });
    
         },
 
