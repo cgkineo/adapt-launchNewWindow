@@ -85,6 +85,7 @@ define([
         },
 
         getLaunchMode: function() {
+            if (!this._config._activeOnSelector) return LAUNCH_MODE.NEW_WINDOW;
 
             var $html = $("html");
             var isNewWindow = this._config._activeOnSelector && $html.is(this._config._activeOnSelector);
