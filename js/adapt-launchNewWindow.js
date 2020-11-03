@@ -84,15 +84,12 @@ define([
     },
 
     getLaunchMode: function() {
-      if (!this._config._activeOnSelector) return LAUNCH_MODE.NEW_WINDOW;
-
-      var $html = $('html');
-      var isNewWindow = this._config._activeOnSelector && $html.is(this._config._activeOnSelector);
-
-      if (isNewWindow) return LAUNCH_MODE.NEW_WINDOW;
+      var selector = this._config._activeOnSelector;
+      if (!selector || $('html').is(selector)) {
+        return LAUNCH_MODE.NEW_WINDOW;
+      }
 
       return LAUNCH_MODE.CURRENT_WINDOW;
-
     },
 
     getHREF: function() {
