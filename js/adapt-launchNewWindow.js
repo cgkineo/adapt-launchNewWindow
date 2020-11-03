@@ -73,7 +73,7 @@ define([
       }
 
       // Check if the launch mode matches properly
-      this.mode = this.getLaunchMode();
+      this.mode = this.getLaunchMode(this._config._activeOnSelector);
       if (this.mode !== LAUNCH_MODE.NEW_WINDOW) return;
 
       this.href = this.getHREF();
@@ -83,8 +83,7 @@ define([
 
     },
 
-    getLaunchMode: function() {
-      var selector = this._config._activeOnSelector;
+    getLaunchMode: function(selector) {
       if (!selector || $('html').is(selector)) {
         return LAUNCH_MODE.NEW_WINDOW;
       }
