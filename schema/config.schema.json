@@ -1,0 +1,120 @@
+{
+  "$anchor": "launchNewWindow-config",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$patch": {
+    "source": {
+      "$ref": "config"
+    },
+    "with": {
+      "properties": {
+        "_launchNewWindow": {
+          "type": "object",
+          "title": "Launch New Window",
+          "default": {},
+          "properties": {
+            "_isEnabled": {
+              "type": "boolean",
+              "title": "Enable Launch New Window",
+              "description": "Opens the course in its own browser window, for platforms that run it inside a frame",
+              "default": false
+            },
+            "_stopSessionInitialize": {
+              "type": "boolean",
+              "title": "Leave the LMS session to the course window",
+              "description": "Stops the launching window starting a SCORM session, so only the course window tracks to the LMS. Keep this on unless the platform needs otherwise",
+              "default": true
+            },
+            "_activeOnPages": {
+              "type": "array",
+              "title": "Active on pages",
+              "description": "Only open a new window when the course is launched from a page matching one of these. Defaults to index_lms.html, the page an LMS launches. Leave empty for every page",
+              "default": [
+                "index_lms.html"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "_activeOnSelector": {
+              "type": "string",
+              "title": "Active on browsers or devices",
+              "description": "Only open a new window when the page's html element matches this selector, e.g. .os-ios for iPhone and iPad, or .os-ios, .os-android for both. Leave empty for every browser and device",
+              "default": ".os-ios"
+            },
+            "_target": {
+              "type": "string",
+              "title": "Window name",
+              "description": "The name given to the course window",
+              "default": "courseWin"
+            },
+            "_strWindowFeatures": {
+              "type": "string",
+              "title": "Window features",
+              "description": "The window features passed to window.open. {{width}} and {{height}} are the available screen size",
+              "default": "width={{width}},height={{height}},menubar=no,location=no,directories=no,resizable=yes,scrollbars=yes"
+            },
+            "_delay": {
+              "type": "number",
+              "title": "Delay before opening (milliseconds)",
+              "description": "How long the launching window shows its message before opening the course window",
+              "default": 2000
+            },
+            "preLaunchTitle": {
+              "type": "string",
+              "title": "Before launch title",
+              "default": "The course should now open in a new browser window.",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "preLaunchBody": {
+              "type": "string",
+              "title": "Before launch body",
+              "description": "{{href}} is the course window's address, for a link the learner can use if a popup blocker stops the window opening",
+              "default": "If this does not occur, please deactivate any popup blocking software - then <a href=\"{{href}}\" target=\"_blank\">click here</a> or refresh this page to try again.",
+              "_adapt": {
+                "translatable": true
+              },
+              "_backboneForms": "TextArea"
+            },
+            "launchTitle": {
+              "type": "string",
+              "title": "Launched title",
+              "default": "The course should now be open in a new browser window.",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "launchBody": {
+              "type": "string",
+              "title": "Launched body",
+              "default": "Please ensure you don't close or do anything in this window whilst the course is in progress.",
+              "_adapt": {
+                "translatable": true
+              },
+              "_backboneForms": "TextArea"
+            },
+            "closedTitle": {
+              "type": "string",
+              "title": "Closed title",
+              "default": "You have closed the course.",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "closedBody": {
+              "type": "string",
+              "title": "Closed body",
+              "default": "Please close this window to continue.",
+              "_adapt": {
+                "translatable": true
+              },
+              "_backboneForms": "TextArea"
+            }
+          }
+        }
+      }
+    }
+  }
+}

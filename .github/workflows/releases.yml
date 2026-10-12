@@ -1,0 +1,11 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+jobs:
+  release:
+    uses: cgkineo/.github/.github/workflows/releases.yml@master
+    secrets: inherit

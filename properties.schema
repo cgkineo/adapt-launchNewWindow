@@ -106,9 +106,9 @@
                 },
                 "launchTitle": {
                   "type": "string",
-                  "default":"Launched",
+                  "default":"The course should now be open in a new browser window.",
                   "required": false,
-                  "title": "The course should now be open in a new browser window.",
+                  "title": "Launched title",
                   "inputType": "Text",
                   "validators": [],
                   "translatable": false
