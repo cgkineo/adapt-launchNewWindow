@@ -1,0 +1,13 @@
+name: Add to main project
+on:
+  issues:
+    types:
+      - opened
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
+jobs:
+  add-to-project:
+    uses: cgkineo/.github/.github/workflows/addtomainproject.yml@master
+    secrets: inherit
