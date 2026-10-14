@@ -1,6 +1,6 @@
 {
   "name": "adapt-launchNewWindow",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "framework": ">=5.19.1",
   "author": "Kineo",
   "homepage": "https://github.com/cgkineo/adapt-launchNewWindow",
@@ -24,8 +24,8 @@
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "conventional-changelog-eslint": "^3.0.9",
-    "semantic-release": "^19.0.3",
-    "semantic-release-replace-plugin": "1.2.6"
+    "semantic-release": "^21.0.1",
+    "semantic-release-replace-plugin": "^1.2.7"
   },
   "scripts": {
     "postversion": "cp package.json bower.json"
